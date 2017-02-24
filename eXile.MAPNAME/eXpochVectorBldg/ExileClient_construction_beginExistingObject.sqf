@@ -34,8 +34,7 @@ else
 	ExileClientConstructionRotation = 0; 
 	ExileClientConstructionObjectDisplayName = getText(configFile >> "CfgVehicles" >> _previewObjectClassName >> "displayName");
 	ExileClientConstructionOffset = [0,	5,0];
-	BuildPosX = 0;BuildPosY = 5;BuildPosZ = 0;BuildVecYaw = 0;BuildVecPitch = 0;BuildVecRoll = 0;
-	[] call freeVectorBuilding;
+	BuildVecYaw = 0;BuildVecPitch = 0;BuildVecRoll = 0;
 	ExileClientConstructionMode = 1;
 	ExileClientConstructionIsInSelectSnapObjectMode = true;
 	ExileClientConstructionSupportSnapMode = count(ExileClientConstructionSnapToObjectClassNames) > 0;

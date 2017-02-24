@@ -73,17 +73,19 @@ while {ExileClientConstructionResult isEqualTo 0} do
 		{
 			case 1:
 			{
-				_newDirAndUp = [[sin BuildVecYaw * cos BuildVecPitch, cos BuildVecYaw * cos BuildVecPitch, sin BuildVecPitch],[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];	
-				_vectorDirection = _newDirAndUp select 0;
-				_vectorUp = _newDirAndUp select 1;
-				ExileClientConstructionObject setVectorDirAndUp [_vectorDirection,_vectorUp];
-				_position = ASLtoATL (AGLtoASL (player modelToWorld ExileClientConstructionOffset));
-				ExileClientConstructionObject setPosATL _position;
-				ExileClientConstructionObject attachTo [player,ExileClientConstructionOffset];
-				
-				//_position = ASLtoATL (AGLtoASL (player modelToWorld ExileClientConstructionOffset));
-				//_rotation = (ExileClientConstructionRotation + (getDir player) + 360) % 360;
-				//_vectorDirection = [sin(_rotation), cos(_rotation), 0]; 
+				if!(_isFlag)then{
+					_newDirAndUp = [[sin BuildVecYaw * cos BuildVecPitch, cos BuildVecYaw * cos BuildVecPitch, sin BuildVecPitch],[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];	
+					_vectorDirection = _newDirAndUp select 0;
+					_vectorUp = _newDirAndUp select 1;
+					ExileClientConstructionObject setVectorDirAndUp [_vectorDirection,_vectorUp];
+					_position = ASLtoATL (AGLtoASL (player modelToWorld ExileClientConstructionOffset));
+					ExileClientConstructionObject setPosATL _position;
+					ExileClientConstructionObject attachTo [player,ExileClientConstructionOffset];
+				}else{
+					_position = ASLtoATL (AGLtoASL (player modelToWorld ExileClientConstructionOffset));
+					_rotation = (ExileClientConstructionRotation + (getDir player) + 360) % 360;
+					_vectorDirection = [sin(_rotation), cos(_rotation), 0];
+				};
 			};
 			case 2:
 			{
@@ -113,8 +115,8 @@ while {ExileClientConstructionResult isEqualTo 0} do
 					ExileClientConstructionCurrentSnapToObject = objNull;
 					_position = getPosATL player;
 					_position set [2, -500];
-					_rotation = (ExileClientConstructionRotation + (getDir player) + 360) % 360;
-					_vectorDirection = [sin(_rotation), cos(_rotation), 0]; 
+					_newDirAndUp = [[sin BuildVecYaw * cos BuildVecPitch, cos BuildVecYaw * cos BuildVecPitch, sin BuildVecPitch],[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];	
+					_vectorDirection = _newDirAndUp select 0;
 					_potentionalSnapObject = cursorTarget;
 					if !(isNull _potentionalSnapObject) then
 					{
@@ -148,8 +150,8 @@ while {ExileClientConstructionResult isEqualTo 0} do
 						if (_x distance _position < 1) exitWith
 						{
 							_position = _x;
-							_rotation = (ExileClientConstructionRotation + (getDir ExileClientConstructionCurrentSnapToObject) + 360) % 360;
-							_vectorDirection = [sin(_rotation), cos(_rotation), 0]; 
+							_newDirAndUp = [[sin BuildVecYaw * cos BuildVecPitch, cos BuildVecYaw * cos BuildVecPitch, sin BuildVecPitch],[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];	
+							_vectorDirection = _newDirAndUp select 0;
 							_vectorUp = vectorUp ExileClientConstructionCurrentSnapToObject;
 							ExileClientConstructionIsSnapped = true;
 						};

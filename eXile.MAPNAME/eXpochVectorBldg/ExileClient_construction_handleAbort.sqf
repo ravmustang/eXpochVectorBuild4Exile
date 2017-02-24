@@ -70,7 +70,6 @@ switch (ExileClientConstructionResult) do
 		};		
 	};
 };
-BuildPosX = 0;BuildPosY = 5;BuildPosZ = 0;
 BuildVecYaw = 0;BuildVecPitch = 0;BuildVecRoll = 0;
 (findDisplay 46) displayRemoveEventHandler ["KeyDown", keyDownEHId];
 ExileClientConstructionObject = objNull;

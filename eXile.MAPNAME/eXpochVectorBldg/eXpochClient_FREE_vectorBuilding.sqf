@@ -26,9 +26,7 @@ keyDownEHId = (findDisplay 46) displayAddEventHandler ["KeyDown", {
 			if(_shift)then{_adjust = 3;};
 			if(_ctrl)then{_adjust = 0.5;};
 			if(_alt)then{	_adjust = 0.25;};
-			BuildVecYaw = BuildVecYaw - _adjust;
-			_newDirAndUp = [[ sin BuildVecYaw * cos BuildVecPitch,cos BuildVecYaw * cos BuildVecPitch,sin BuildVecPitch],	[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];
-			ExileClientConstructionObject setVectorDirAndUp _newDirAndUp;
+			BuildVecYaw = (((BuildVecYaw - _adjust)min 360) max -360);
 			_handled = true;
 		};
 		case 73: {
@@ -36,9 +34,7 @@ keyDownEHId = (findDisplay 46) displayAddEventHandler ["KeyDown", {
 			if(_shift)then{_adjust = 3;};
 			if(_ctrl)then{_adjust = 0.5;};
 			if(_alt)then{	_adjust = 0.25;};
-			BuildVecYaw = BuildVecYaw + _adjust;
-			_newDirAndUp = [[ sin BuildVecYaw * cos BuildVecPitch,cos BuildVecYaw * cos BuildVecPitch,sin BuildVecPitch],	[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];
-			ExileClientConstructionObject setVectorDirAndUp _newDirAndUp;
+			BuildVecYaw = (((BuildVecYaw + _adjust)min 360) max -360);
 			_handled = true;
 		};
 		case 16: {
@@ -46,9 +42,7 @@ keyDownEHId = (findDisplay 46) displayAddEventHandler ["KeyDown", {
 			if(_shift)then{_adjust = 3;};
 			if(_ctrl)then{_adjust = 0.5;};
 			if(_alt)then{	_adjust = 0.25;};
-			BuildVecYaw = BuildVecYaw - _adjust;
-			_newDirAndUp = [[ sin BuildVecYaw * cos BuildVecPitch,cos BuildVecYaw * cos BuildVecPitch,sin BuildVecPitch],	[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];
-			ExileClientConstructionObject setVectorDirAndUp _newDirAndUp;
+			BuildVecYaw = (((BuildVecYaw - _adjust)min 360) max -360);
 			_handled = true;
 		};
 		case 18: {
@@ -56,9 +50,7 @@ keyDownEHId = (findDisplay 46) displayAddEventHandler ["KeyDown", {
 			if(_shift)then{_adjust = 3;};
 			if(_ctrl)then{_adjust = 0.5;};
 			if(_alt)then{	_adjust = 0.25;};
-			BuildVecYaw = BuildVecYaw + _adjust;
-			_newDirAndUp = [[ sin BuildVecYaw * cos BuildVecPitch,cos BuildVecYaw * cos BuildVecPitch,sin BuildVecPitch],	[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];
-			ExileClientConstructionObject setVectorDirAndUp _newDirAndUp;
+			BuildVecYaw = (((BuildVecYaw + _adjust)min 360) max -360);
 			_handled = true;
 		};
 		case 72: {
@@ -66,10 +58,7 @@ keyDownEHId = (findDisplay 46) displayAddEventHandler ["KeyDown", {
 			if(_shift)then{_adjust = 1.5;};
 			if(_ctrl)then{_adjust = 0.1;};
 			if(_alt)then{	_adjust = 0.01;};
-			BuildPosY = BuildPosY + _adjust;
-			ExileClientConstructionOffset = [BuildPosX,BuildPosY,BuildPosZ];
-			_newDirAndUp = [[ sin BuildVecYaw * cos BuildVecPitch,cos BuildVecYaw * cos BuildVecPitch,sin BuildVecPitch],	[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];
-			ExileClientConstructionObject setVectorDirAndUp _newDirAndUp;
+			ExileClientConstructionOffset set [1,((((ExileClientConstructionOffset select 1) + _adjust)min 10) max -10)];
 			_handled = true;
 		};
 		case 80: {
@@ -77,10 +66,7 @@ keyDownEHId = (findDisplay 46) displayAddEventHandler ["KeyDown", {
 			if(_shift)then{_adjust = 1.5;};
 			if(_ctrl)then{_adjust = 0.1;};
 			if(_alt)then{	_adjust = 0.01;};
-			BuildPosY = BuildPosY - _adjust;
-			ExileClientConstructionOffset = [BuildPosX,BuildPosY,BuildPosZ];
-			_newDirAndUp = [[ sin BuildVecYaw * cos BuildVecPitch,cos BuildVecYaw * cos BuildVecPitch,sin BuildVecPitch],	[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];
-			ExileClientConstructionObject setVectorDirAndUp _newDirAndUp;
+			ExileClientConstructionOffset set [1,((((ExileClientConstructionOffset select 1) - _adjust)min 10) max -10)];
 			_handled = true;
 		};
 		case 75: {
@@ -88,10 +74,7 @@ keyDownEHId = (findDisplay 46) displayAddEventHandler ["KeyDown", {
 			if(_shift)then{_adjust = 1.5;};
 			if(_ctrl)then{_adjust = 0.1;};
 			if(_alt)then{	_adjust = 0.01;};
-			BuildPosX = BuildPosX - _adjust;
-			ExileClientConstructionOffset = [BuildPosX,BuildPosY,BuildPosZ];
-			_newDirAndUp = [[ sin BuildVecYaw * cos BuildVecPitch,cos BuildVecYaw * cos BuildVecPitch,sin BuildVecPitch],	[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];
-			ExileClientConstructionObject setVectorDirAndUp _newDirAndUp;
+			ExileClientConstructionOffset set [0,((((ExileClientConstructionOffset select 0) - _adjust)min 10) max -10)];
 			_handled = true;
 		};
 		case 77: {
@@ -99,24 +82,17 @@ keyDownEHId = (findDisplay 46) displayAddEventHandler ["KeyDown", {
 			if(_shift)then{_adjust = 1.5;};
 			if(_ctrl)then{_adjust = 0.1;};
 			if(_alt)then{	_adjust = 0.01;};
-			BuildPosX = BuildPosX + _adjust;
-			ExileClientConstructionOffset = [BuildPosX,BuildPosY,BuildPosZ];
-			_newDirAndUp = [[ sin BuildVecYaw * cos BuildVecPitch,cos BuildVecYaw * cos BuildVecPitch,sin BuildVecPitch],	[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];
-			ExileClientConstructionObject setVectorDirAndUp _newDirAndUp;
+			ExileClientConstructionOffset set [0,((((ExileClientConstructionOffset select 0) + _adjust)min 10) max -10)];
 			_handled = true;
 		};
 		case 76: {
-			BuildPosX = 0;BuildPosY = 5;BuildPosZ = 0;BuildVecYaw = 0;BuildVecPitch = 0;BuildVecRoll = 0;
-			ExileClientConstructionOffset = [BuildPosX,BuildPosY,BuildPosZ];
-			_newDirAndUp = [[ sin BuildVecYaw * cos BuildVecPitch,cos BuildVecYaw * cos BuildVecPitch,sin BuildVecPitch],	[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];
-			ExileClientConstructionObject setVectorDirAndUp _newDirAndUp;
+			BuildVecYaw = 0;BuildVecPitch = 0;BuildVecRoll = 0;
+			ExileClientConstructionOffset = [0,5,0];
 			_handled = true;
 		};
 		case 14: {
-			BuildPosX = 0;BuildPosY = 5;BuildPosZ = 0;BuildVecYaw = 0;BuildVecPitch = 0;BuildVecRoll = 0;
-			ExileClientConstructionOffset = [BuildPosX,BuildPosY,BuildPosZ];
-			_newDirAndUp = [[ sin BuildVecYaw * cos BuildVecPitch,cos BuildVecYaw * cos BuildVecPitch,sin BuildVecPitch],	[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];
-			ExileClientConstructionObject setVectorDirAndUp _newDirAndUp;
+			BuildVecYaw = 0;BuildVecPitch = 0;BuildVecRoll = 0;
+			ExileClientConstructionOffset = [0,5,0];
 			_handled = true;
 		};
 		case 208: {
@@ -124,9 +100,7 @@ keyDownEHId = (findDisplay 46) displayAddEventHandler ["KeyDown", {
 			if(_shift)then{_adjust = 1.5;};
 			if(_ctrl)then{_adjust = 0.1;};
 			if(_alt)then{	_adjust = 0.01;};
-			BuildVecPitch = BuildVecPitch + _adjust;BuildVecYaw = BuildVecYaw;BuildVecRoll = BuildVecRoll;
-			_newDirAndUp = [[ sin BuildVecYaw * cos BuildVecPitch,cos BuildVecYaw * cos BuildVecPitch,sin BuildVecPitch],	[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];
-			ExileClientConstructionObject setVectorDirAndUp _newDirAndUp;
+			BuildVecPitch = (((BuildVecPitch + _adjust)min 360) max -360);
 			_handled = true;
 		};
 		case 200: {
@@ -134,9 +108,7 @@ keyDownEHId = (findDisplay 46) displayAddEventHandler ["KeyDown", {
 			if(_shift)then{_adjust = 1.5;};
 			if(_ctrl)then{_adjust = 0.1;};
 			if(_alt)then{	_adjust = 0.01;};
-			BuildVecPitch = BuildVecPitch - _adjust;BuildVecYaw = BuildVecYaw;BuildVecRoll = BuildVecRoll;
-			_newDirAndUp = [[ sin BuildVecYaw * cos BuildVecPitch,cos BuildVecYaw * cos BuildVecPitch,sin BuildVecPitch],	[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];
-			ExileClientConstructionObject setVectorDirAndUp _newDirAndUp;
+			BuildVecPitch =(((BuildVecPitch - _adjust)min 360) max -360);
 			_handled = true;
 		};
 		case 203: {
@@ -144,9 +116,7 @@ keyDownEHId = (findDisplay 46) displayAddEventHandler ["KeyDown", {
 			if(_shift)then{_adjust = 1.5;};
 			if(_ctrl)then{_adjust = 0.1;};
 			if(_alt)then{	_adjust = 0.01;};
-			BuildVecRoll = BuildVecRoll - _adjust;
-			_newDirAndUp = [[ sin BuildVecYaw * cos BuildVecPitch,cos BuildVecYaw * cos BuildVecPitch,sin BuildVecPitch],	[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];
-			ExileClientConstructionObject setVectorDirAndUp _newDirAndUp;
+			BuildVecRoll = (((BuildVecRoll - _adjust)min 360) max -360);
 			_handled = true;
 		};
 		case 205: {
@@ -154,9 +124,7 @@ keyDownEHId = (findDisplay 46) displayAddEventHandler ["KeyDown", {
 			if(_shift)then{_adjust = 1.5;};
 			if(_ctrl)then{_adjust = 0.1;};
 			if(_alt)then{	_adjust = 0.01;};
-			BuildVecRoll = BuildVecRoll + _adjust;
-			_newDirAndUp = [[ sin BuildVecYaw * cos BuildVecPitch,cos BuildVecYaw * cos BuildVecPitch,sin BuildVecPitch],	[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];
-			ExileClientConstructionObject setVectorDirAndUp _newDirAndUp;
+			BuildVecRoll = (((BuildVecRoll + _adjust)min 360) max -360);;
 			_handled = true;
 		};
 	};
