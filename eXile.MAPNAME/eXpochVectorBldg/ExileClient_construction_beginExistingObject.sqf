@@ -33,7 +33,8 @@ else
 	ExileClientConstructionProcess = 2;
 	ExileClientConstructionRotation = 0; 
 	ExileClientConstructionObjectDisplayName = getText(configFile >> "CfgVehicles" >> _previewObjectClassName >> "displayName");
-	ExileClientConstructionOffset = [0,	5,0];
+	ExileClientConstructionOffset = [0,5,0];
+	DPBEAClientObjAttachedTo = player;
 	BuildVecYaw = 0;BuildVecPitch = 0;BuildVecRoll = 0;
 	ExileClientConstructionMode = 1;
 	ExileClientConstructionIsInSelectSnapObjectMode = true;

@@ -34,9 +34,12 @@ class CfgExileCustomCode
 
 		ExileClient_util_fusRoDah = "myaddon\myfunction.sqf";
 	*/
-	ExileClient_construction_thread = "eXpochVectorBldg\ExileClient_construction_thread.sqf";
+	ExileClient_object_construction_move = "eXpochVectorBldg\ExileClient_object_construction_move.sqf";
+	ExileClient_gui_hud_event_onKeyDown = "eXpochVectorBldg\ExileClient_gui_hud_event_onKeyDown.sqf";
+	ExileClient_gui_hud_event_onKeyUp = "eXpochVectorBldg\ExileClient_gui_hud_event_onKeyUp.sqf";
 	ExileClient_construction_beginExistingObject = "eXpochVectorBldg\ExileClient_construction_beginExistingObject.sqf";
 	ExileClient_construction_beginNewObject = "eXpochVectorBldg\ExileClient_construction_beginNewObject.sqf";
-	ExileClient_object_construction_network_constructionResponse = "eXpochVectorBldg\ExileClient_object_construction_network_constructionResponse.sqf";
-	ExileClient_construction_handleAbort = "eXpochVectorBldg\ExileClient_construction_handleAbort.sqf";
+	ExileClient_construction_thread = "eXpochVectorBldg\ExileClient_construction_thread.sqf";
+	ExileClient_gui_constructionMode_update = "eXpochVectorBldg\ExileClient_gui_constructionMode_update.sqf";
+	ExileClient_util_world_canBuildHere = "eXpochVectorBldg\ExileClient_util_world_canBuildHere.sqf";
 };

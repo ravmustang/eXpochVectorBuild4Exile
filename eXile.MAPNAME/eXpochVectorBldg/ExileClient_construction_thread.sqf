@@ -44,6 +44,9 @@ _boundingBoxPointsBottom =
 ];
 ExileClientConstructionBoundingRadius = 1 + 0.5 * ([_boundingBoxMaximum select 0, _boundingBoxMaximum select 1, 0] distance [_boundingBoxMinimum select 0, _boundingBoxMinimum select 1, 0]);
 ExileClientConstructionOffset set [1, 5 max ExileClientConstructionBoundingRadius];
+ExileClientConstructionVectorDirAndUp = [[0,0,0],[0,0,1]];
+ExileClientConstructionVectorPosASL = [0,0,0];
+BuildVecYaw = 0;BuildVecPitch = 0;BuildVecRoll = 0;
 _objectColor = "#(argb,2,2,1)color(0.7,0.93,0,0.6,ca)";
 _materialColor = _objectColor;
 _simulatePhysics = false;
@@ -74,13 +77,10 @@ while {ExileClientConstructionResult isEqualTo 0} do
 			case 1:
 			{
 				if!(_isFlag)then{
-					_newDirAndUp = [[sin BuildVecYaw * cos BuildVecPitch, cos BuildVecYaw * cos BuildVecPitch, sin BuildVecPitch],[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];	
+					_position = ASLtoATL (AGLtoASL (player modelToWorld ExileClientConstructionOffset));
+					_newDirAndUp = [[sin ((BuildVecYaw + (getDir player) + 360) % 360) * cos BuildVecPitch, cos ((BuildVecYaw + (getDir player) + 360) % 360) * cos BuildVecPitch, sin BuildVecPitch],[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-((BuildVecYaw + (getDir player) + 360) % 360)] call BIS_fnc_rotateVector2D];
 					_vectorDirection = _newDirAndUp select 0;
 					_vectorUp = _newDirAndUp select 1;
-					ExileClientConstructionObject setVectorDirAndUp [_vectorDirection,_vectorUp];
-					_position = ASLtoATL (AGLtoASL (player modelToWorld ExileClientConstructionOffset));
-					ExileClientConstructionObject setPosATL _position;
-					ExileClientConstructionObject attachTo [player,ExileClientConstructionOffset];
 				}else{
 					_position = ASLtoATL (AGLtoASL (player modelToWorld ExileClientConstructionOffset));
 					_rotation = (ExileClientConstructionRotation + (getDir player) + 360) % 360;
@@ -89,22 +89,16 @@ while {ExileClientConstructionResult isEqualTo 0} do
 			};
 			case 2:
 			{
-				_newDirAndUp = [[sin BuildVecYaw * cos BuildVecPitch, cos BuildVecYaw * cos BuildVecPitch, sin BuildVecPitch],[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];
+				_newDirAndUp = [[sin ((BuildVecYaw + (getDir player) + 360) % 360) * cos BuildVecPitch, cos ((BuildVecYaw + (getDir player) + 360) % 360) * cos BuildVecPitch, sin BuildVecPitch],[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-((BuildVecYaw + (getDir player) + 360) % 360)] call BIS_fnc_rotateVector2D];
 				_vectorDirection = _newDirAndUp select 0;
-				_vectorUp = _newDirAndUp select 1;
-				ExileClientConstructionObject setVectorDirAndUp [_vectorDirection,_vectorUp];
-				
+				_vectorUp = _newDirAndUp select 1;				
 				_position = ASLtoATL (AGLtoASL (player modelToWorld ExileClientConstructionOffset));
 				_position = 
 				[
 					(_position select 0) - ((_position select 0) % (ExileClientConstructionGrid select 0)),
 					(_position select 1) - ((_position select 1) % (ExileClientConstructionGrid select 1)),
 					(_position select 2) - ((_position select 2) % (ExileClientConstructionGrid select 2))
-				];
-				
-				
-				//_rotation = (ExileClientConstructionRotation + 360) % 360;
-				//_vectorDirection = [sin(_rotation), cos(_rotation), 0]; 	
+				];	
 			};
 			case 3:
 			{
@@ -158,6 +152,13 @@ while {ExileClientConstructionResult isEqualTo 0} do
 					}
 					forEach ExileClientConstructionPossibleSnapPositions;		
 				};
+			};
+			case 4:
+			{
+				_position = ASLtoATL (AGLtoASL (DPBEAClientObjAttachedTo modelToWorld ExileClientConstructionOffset));
+				_newDirAndUp = [[sin BuildVecYaw * cos BuildVecPitch, cos BuildVecYaw * cos BuildVecPitch, sin BuildVecPitch],[[ sin BuildVecRoll,-sin BuildVecPitch,cos BuildVecRoll * cos BuildVecPitch],-BuildVecYaw] call BIS_fnc_rotateVector2D];
+				_vectorDirection = _newDirAndUp select 0;
+				_vectorUp = _newDirAndUp select 1;
 			};
 		};
 		ExileClientConstructionObject setVectorDirAndUp [_vectorDirection,_vectorUp];
@@ -256,7 +257,10 @@ while {ExileClientConstructionResult isEqualTo 0} do
 	};
 	if (ExileClientConstructionStartPosition distance (getPosASL player) > 20) then
 	{
-		ExileClientConstructionResult = 3;
+		if!(ExileClientConstructionMode isEqualTo 4)then
+		{
+			ExileClientConstructionResult = 3;
+		};
 	};
 	if (ExileClientPlayerIsInCombat) then
 	{

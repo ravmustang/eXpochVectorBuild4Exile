@@ -26,6 +26,7 @@ ExileClientConstructionSnapToObjectClassNames = (ExileClientConstructionConfig >
 ExileClientConstructionProcess = 1;
 ExileClientConstructionOffset = [0, 5, 0]; 
 ExileClientConstructionPosition = [0, 0, 0];
+DPBEAClientObjAttachedTo = player;
 BuildVecYaw = 0;BuildVecPitch = 0;BuildVecRoll = 0;
 ExileClientConstructionRotation = 0; 
 ExileClientConstructionKitClassName = _kitClassName; 
