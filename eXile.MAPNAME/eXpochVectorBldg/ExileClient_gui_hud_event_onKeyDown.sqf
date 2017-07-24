@@ -75,26 +75,68 @@ switch (_keyCode) do
 	{
 		if (ExileClientIsInConstructionMode) then
 		{
-			_step = 1;
-			if(_shiftState)then{_step = 3;};
-			if(_controlState)then{_step = 0.5;};
-			if(_altState)then{	_step = 0.25;};
-			BuildVecYaw = (((BuildVecYaw - _step)min 360) max -360);	
-			[] call ExileClient_gui_constructionMode_update;
-			_stopPropagation = true;
+			if!(ExileClientConstructionMode isEqualTo 3)then
+			{
+				_step = 1;
+				if(_shiftState)then{_step = 3;};
+				if(_controlState)then{_step = 0.5;};
+				if(_altState)then{	_step = 0.25;};
+				BuildVecYaw = (((BuildVecYaw - _step)min 360) max -360);	
+				[] call ExileClient_gui_constructionMode_update;
+				_stopPropagation = true;
+			}
+			else
+			{
+				_step = 45;
+				if (_shiftState) then 
+				{
+					_step = 90;
+				}
+				else 
+				{
+					if (_controlState) then
+					{
+						_step = 22.5;
+					};
+				};
+				ExileClientConstructionRotation = (ExileClientConstructionRotation - _step + 360) % 360;	
+				[] call ExileClient_gui_constructionMode_update;
+				_stopPropagation = true;
+			};
 		};
 	};
 	case 0x12:
 	{
 		if (ExileClientIsInConstructionMode) then
 		{
-			_step = 1;
-			if(_shiftState)then{_step = 3;};
-			if(_controlState)then{_step = 0.5;};
-			if(_altState)then{	_step = 0.25;};
-			BuildVecYaw = (((BuildVecYaw + _step)min 360) max -360);	
-			[] call ExileClient_gui_constructionMode_update;
-			_stopPropagation = true;
+			if!(ExileClientConstructionMode isEqualTo 3)then
+			{
+				_step = 1;
+				if(_shiftState)then{_step = 3;};
+				if(_controlState)then{_step = 0.5;};
+				if(_altState)then{	_step = 0.25;};
+				BuildVecYaw = (((BuildVecYaw + _step)min 360) max -360);	
+				[] call ExileClient_gui_constructionMode_update;
+				_stopPropagation = true;
+			}
+			else
+			{
+				_step = 45;
+				if (_shiftState) then 
+				{
+					_step = 90;
+				}
+				else 
+				{
+					if (_controlState) then
+					{
+						_step = 22.5;
+					};
+				};
+				ExileClientConstructionRotation = (ExileClientConstructionRotation + _step + 360) % 360;	
+				[] call ExileClient_gui_constructionMode_update;
+				_stopPropagation = true;
+			};
 		};
 	};
 	case 0x47:
