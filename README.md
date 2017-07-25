@@ -1,5 +1,4 @@
-![ArmA 1.66](https://img.shields.io/badge/ArmA%203-1.66-blue.svg) ![Exile 1.0.2](https://img.shields.io/badge/Exile-1.0.2%20Kohlrabi-yellowgreen.svg) ![Build Status](https://img.shields.io/badge/Custom%20Build-passing-38AA38.svg) ![eXpochA4E Status](https://img.shields.io/badge/eXpochA4E-alpha-38AA38.svg) ![eXpochACE Status](https://img.shields.io/badge/eXpochACE-alpha-38AA38.svg)
-
+![ArmA 1.74](https://img.shields.io/badge/ArmA%203-1.66-blue.svg) ![Exile 1.0.2](https://img.shields.io/badge/Exile-1.0.2%20Kohlrabi-yellowgreen.svg) ![Build Status](https://img.shields.io/badge/Custom%20Build-passing-38AA38.svg) 
 
 # To the User:
 ####NEW Disclaimer:
