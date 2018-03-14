@@ -228,7 +228,7 @@ while {ExileClientConstructionResult isEqualTo 0} do
 			_objectColor = "#(argb,2,2,1)color(0.91,0,0,0.6,ca)";
 		};
 	};
-	if !(([configName ExileClientConstructionConfig, ASLtoAGL (getPosASL ExileClientConstructionObject), getPlayerUID player] call ExileClient_util_world_canBuildHere) isEqualTo 0) then
+	if !(([configName ExileClientConstructionConfig, getPosASL ExileClientConstructionObject, getPlayerUID player] call ExileClient_util_world_canBuildHere) isEqualTo 0) then
 	{
 		ExileClientConstructionCanPlaceObject = false;
 		_simulatePhysics = false;

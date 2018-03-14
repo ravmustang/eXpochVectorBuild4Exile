@@ -208,30 +208,40 @@ switch (_keyCode) do
 	};
 	case 0x07:
 	{
-		if (ExileClientIsInConstructionMode) then
+		if (getText(missionConfigFile >> "Header" >> "gameType") isEqualTo "Escape") then 
 		{
-			if(ExileClientConstructionLock)then
+			if (alive player) then
 			{
-				ExileClientConstructionLock = false;
-				_posObject = position ExileClientConstructionObject;
-				ExileClientConstructionOffset = player worldToModel _posObject;
-				ExileClientConstructionRotation = (getDir ExileClientConstructionObject) - (getDir player);
-			}
-			else
-			{
-				ExileClientConstructionLock = true;
+				[] call ExileClient_gui_hud_toggleEscapeStats;
 			};	
 		}
 		else
 		{
-			if (!ExileClientXM8IsVisible) then
+			if (ExileClientIsInConstructionMode) then
 			{
-				if ("Exile_Item_XM8" in (assignedItems player)) then
+				if(ExileClientConstructionLock)then
 				{
-					if (alive player) then
+					ExileClientConstructionLock = false;
+					_posObject = position ExileClientConstructionObject;
+					ExileClientConstructionOffset = player worldToModel _posObject;
+					ExileClientConstructionRotation = (getDir ExileClientConstructionObject) - (getDir player);
+				}
+				else
+				{
+					ExileClientConstructionLock = true;
+				};	
+			}
+			else
+			{
+				if (!ExileClientXM8IsVisible) then
+				{
+					if ("Exile_Item_XM8" in (assignedItems player)) then
 					{
-						[] call ExileClient_gui_xm8_show;
-					};	
+						if (alive player) then
+						{
+							[] call ExileClient_gui_xm8_show;
+						};	
+					};
 				};
 			};
 		};

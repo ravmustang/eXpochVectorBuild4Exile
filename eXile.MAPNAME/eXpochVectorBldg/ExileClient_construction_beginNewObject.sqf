@@ -41,8 +41,7 @@ else
 	ExileClientConstructionIsInSelectSnapObjectMode = true;
 	ExileClientConstructionSupportSnapMode = count(ExileClientConstructionSnapToObjectClassNames) > 0;
 	ExileClientConstructionCurrentSnapToObject = objNull;
-	ExileClientConstructionPosition = [getPosATL player, ExileClientConstructionOffset select 1, getDir player] call ExileClient_util_math_getPositionInDirection;
-	ExileClientConstructionPosition set[2, ExileClientConstructionOffset select 2];
+	ExileClientConstructionPosition = ASLtoATL ([getPosASL player, 5, getDir player] call ExileClient_util_math_getPositionInDirection);	
 	{
 		player reveal _x;
 	}
@@ -53,7 +52,7 @@ else
 	}
 	else
 	{
-		["buildTerritoryRequest", [_previewObjectClassName, (ASLtoAGL (ATLtoASL ExileClientConstructionPosition)),_this select 1,_this select 2]] call ExileClient_system_network_send;
+		["buildTerritoryRequest", [_previewObjectClassName,ExileClientConstructionPosition,_this select 1,_this select 2]] call ExileClient_system_network_send;
 	};
 };
 true
